@@ -5,6 +5,8 @@
  */
 package GRAFO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Andrés Vidal.Universidad del Cauca - Ingeniería de Sistemas. 2017
@@ -29,7 +31,7 @@ public class PruebaGrafo {
         digrafo.insertarVertice(9);
         digrafo.insertarVertice(10);
        
-        
+       
         digrafo.insertarArista(1,2);
         digrafo.insertarArista(2,3);
         digrafo.insertarArista(2,4);
@@ -47,17 +49,25 @@ public class PruebaGrafo {
        // System.out.println(digrafo.getAristas().getTamanio());
         
         System.out.println("Lista de Adyacencia:");
-       ListaCD [] lista= digrafo.getListaAdyacencia();
-       
-        for (ListaCD listaCD : lista) {
-            System.out.println(listaCD);
+        
+        
+        digrafo.getCaminos(digrafo.buscarVertice(1),digrafo.buscarVertice(10));
+        
+        ArrayList<ArrayList<Vertice>> caminos = digrafo.getCaminos();
+        System.out.println("");
+        for (ArrayList<Vertice> camino : caminos) {
+            for (int i = 0; i < camino.size(); i++) {
+                System.out.print("["+camino.get(i)+"]");
+            }
+            System.out.println("");
         }
+       
+      
+        
       
         
         
-        
-        
-        
+       
         
         
     }
