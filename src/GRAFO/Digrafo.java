@@ -37,8 +37,8 @@ public class Digrafo<T> {
      * Representa el listado de Aristas del Digrafo
      */
     private ListaCD<Arista> aristas;
-    
-     HashMap<String,Arista> hashArist;
+
+    HashMap<String, Arista> hashArist;
 
     ////////////////////////////////////////////////////////////
     // Digrafo - Implementacion de Metodos //////////////////////
@@ -49,10 +49,11 @@ public class Digrafo<T> {
      * <b> post: </b> Se creo un nuevo Digrafo sin Vertices y Aristas.
      */
     public Digrafo() {
-        hashAristas();
-        hashArist=new HashMap<>();
+
+        hashArist = new HashMap<>();
         this.vertices = new ListaCD<Vertice>();
         this.aristas = new ListaCD<Arista>();
+      
     }
 
     /**
@@ -173,14 +174,14 @@ public class Digrafo<T> {
         return (true);
     }
 
-    public boolean insertarAristaCondicion(T orig, T dest,CondicionArista condicion) {
+    public boolean insertarAristaCondicion(T orig, T dest, CondicionArista condicion) {
         Vertice<T> o = this.buscarVertice(orig);
         Vertice<T> d = this.buscarVertice(dest);
         if (o == null || d == null) {
             return (false);
         }
         o.insertarVecino(d);
-        this.aristas.insertarAlFinal(new Arista<T>(o, d, -1,condicion));
+        this.aristas.insertarAlFinal(new Arista<T>(o, d, -1, condicion));
         return (true);
     }
 
@@ -1915,13 +1916,21 @@ public class Digrafo<T> {
             }
         }
     }
-    public void hashAristas(){       
-        for (int i = 0; i < aristas.getTamanio(); i++) {            
-            hashArist.put(aristas.get(i).getVertA()+","+aristas.get(i).getVertA(), aristas.get(i));            
+
+    public void hashAristas() {
+        if (hashArist == null) {
+            hashArist = new HashMap();
+        }
+        for (int i = 0; i < aristas.getTamanio(); i++) {
+            Arista arista= aristas.get(i);
+            hashArist.put(arista.getVertA() + "," + arista.getVertB(),arista);
         }
     }
-    public Arista buscarArista(Vertice<T> vertA,Vertice<T> vertB){
-        return hashArist.get(vertA+","+vertB);
+
+    public Arista buscarArista(Vertice<T> vertA, Vertice<T> vertB) {
+        
+            return hashArist.get(vertA + "," + vertB);
+     
     }
 
     /**
@@ -1946,7 +1955,5 @@ public class Digrafo<T> {
         }
         return (cad);
     }
-    
-    
 
 }// Fin de la Clase Digrafo - Grafo Dirigido

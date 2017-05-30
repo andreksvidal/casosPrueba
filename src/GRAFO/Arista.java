@@ -70,7 +70,7 @@ public class Arista<T> {
         this.vertB = vB;
         this.peso = p;
         this.esVisit = false;
-        condicion = condi;
+        this.condicion = condi;
     }
 
     public Arista(Vertice<T> vA, Vertice<T> vB, int p) {

@@ -10,6 +10,7 @@ import GRAFO.AsignadorValor;
 import GRAFO.ValidadorCondicion;
 import GRAFO.Vertice;
 import Problema.CasosPrueba.EvaluadorCaminos;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,8 +28,8 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
         for (int i = 0; i < entradas.size(); i++) {
             String clase = entradas.get(i).getClass().getName();
 
-            if (clase.equalsIgnoreCase("String")) {
-                variablesSimples.put(clase, i);
+            if (clase.equalsIgnoreCase("java.lang.String")) {
+                variablesSimples.put((String)entradas.get(i), i);
             } else {
                 AsignadorValor asignadorValor = (AsignadorValor) entradas.get(i);
                 String valor = asignadorValor.getCondicion();
@@ -38,7 +39,7 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
         }
 
         double caminosCubiertos = 0;
-        ArrayList<ArrayList<Double>> subVectores = traerSubVectores(genotipo, entradas.size(), caminos);
+        ArrayList<ArrayList<Double>> subVectores = traerSubVectores(genotipo, variablesSimples.size());
 
         ValidadorCondicion validador = new ValidadorCondicion();
         for (int caminoi = 0; caminoi < caminos.size(); caminoi++) {
@@ -76,22 +77,22 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
         return probabilidad;
     }
 
-    private ArrayList<ArrayList<Double>> traerSubVectores(double[] genotipo, int size, ArrayList<ArrayList<Arista>> caminos) {
+    private ArrayList<ArrayList<Double>> traerSubVectores(double[] genotipo, int numSimples) {
 
         ArrayList<ArrayList<Double>> genotipos = new ArrayList();
-        for (int i = 0; i < genotipo.length; i++) {
-            ArrayList<Double> tmp = new ArrayList<>();
-            for (int j = 0; j < size - 1; j++) {
-                tmp.add(genotipo[i + j]);
+        int numeroCasos= genotipo.length/numSimples;
+       
+        
+        int subVectori=0;
+        while(subVectori<genotipo.length)
+        {
+            ArrayList<Double> subVector= new ArrayList();
+            
+            for (int posi = 0; posi < numSimples; posi++) {
+                subVector.add(genotipo[subVectori+posi]);
             }
-            genotipos.add(tmp);
-        }
-
-        for (int i = 0; i < caminos.size(); i++) {
-            ArrayList<Arista> caminoTmp = caminos.get(i);
-            for (int j = 0; j < caminoTmp.size(); j++) {
-
-            }
+            genotipos.add(subVector);
+            subVectori+=numSimples;
         }
         return genotipos;
     }

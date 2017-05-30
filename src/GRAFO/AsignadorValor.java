@@ -7,7 +7,6 @@ package GRAFO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.print.attribute.HashAttributeSet;
 
 /**
  *
@@ -36,9 +35,9 @@ public class AsignadorValor {
     
     public double resolverValor (ArrayList<Double> subVector , HashMap<String, Integer> variablesSimples)
     {
-        double p= variablesSimples.get("p");
-        double q= variablesSimples.get("q");
+        int p= variablesSimples.get("p");
+        int q= variablesSimples.get("q");
         
-        return  p+q;
+        return  subVector.get(p) + subVector.get(q);
     }
 }

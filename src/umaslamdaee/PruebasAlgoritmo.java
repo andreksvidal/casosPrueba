@@ -29,7 +29,7 @@ public class PruebasAlgoritmo {
         /*BLOQUE DE PARAMETROS MODIFICABLES*/
         ///////////////////////////////////////////////////////////
         int lambda = 25;//Valor de lambda.
-        int maximoIteraciones = 100;//Maximo numero de itereciones para la convergencia del algoritmo.
+        int maximoIteraciones = 500;//Maximo numero de itereciones para la convergencia del algoritmo.
 
         /*EVALUADORES*/
         EvaluadorCaminos evCaminos = new EvaluadorCaminosAlgoritmo1();
@@ -43,9 +43,9 @@ public class PruebasAlgoritmo {
         Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos, 4, entradas,caminosAristas);//Para la funcion del sombrero Mexicano.
         /*FIN EVALUADORES*/
 
-        int dimensionGenes = 4 * 2;//Dimension del vector del individuo.
-        float rangoMinimo = -1000;// Rango maximo del numero a generar aleatoriamente para crear un individuo.
-        float rangoMaximo = 1000;//  Rango minimo del numero a generar aleatoriamente para crear un individuo.
+        int dimensionGenes = caminosAristas.size() * 2;//Dimension del vector del individuo. #Caminos * 2 variables en este caso .
+        float rangoMinimo = -200;// Rango maximo del numero a generar aleatoriamente para crear un individuo.
+        float rangoMaximo = 200;//  Rango minimo del numero a generar aleatoriamente para crear un individuo.
 
         String objetivo = "+"; //Acepta 2 parametros : > "+" : Cuando el objetivo es maximizar , ordena de mayor a menor.
         //                      > "-" : Cuando el objetivo es minimizar , ordena de menor a mayor.
@@ -108,6 +108,8 @@ public class PruebasAlgoritmo {
         digrafo.insertarArista(9, 10);
         digrafo.insertarArista(7, 10);
 
+        
+        digrafo.hashAristas();
         // System.out.println(digrafo.getAristas().getTamanio());
         System.out.println("Lista de Adyacencia:");
 
@@ -119,7 +121,7 @@ public class PruebasAlgoritmo {
             ArrayList<Vertice> caminoTmp=caminos.get(i);
             ArrayList<Arista> caminoArTmp=new ArrayList<>();
             for (int j = 0; j < caminoTmp.size()-1; j++) {
-                caminoArTmp.add(digrafo.buscarArista(caminoTmp.get(i), caminoTmp.get(i+1)));
+                caminoArTmp.add(digrafo.buscarArista(caminoTmp.get(j), caminoTmp.get(j+1)));
             }
             caminosAristas.add(caminoArTmp);
         }
