@@ -6,6 +6,9 @@
 
 package Problema.CasosPrueba;
 
+import GRAFO.Arista;
+import java.util.ArrayList;
+
 
 
 /**
@@ -18,5 +21,5 @@ public abstract class EvaluadorCaminos {
     
     
     
-    public abstract double probCobertura(double [] genotipo);   
+    public abstract double probCobertura(double[] genotipo, ArrayList<Object> entradas, ArrayList<ArrayList<Arista>> caminos);   
 }

@@ -10,6 +10,8 @@
 
 package GRAFO;
 
+import Lista.ListaCD;
+
 
 
 /**

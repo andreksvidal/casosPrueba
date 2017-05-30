@@ -8,6 +8,7 @@ package Problema.CasosPrueba;
 
 
 
+import GRAFO.Arista;
 import Problema.CasosPrueba.EvaluadorCaminos;
 import java.util.ArrayList;
 import umaslamdaee.Evaluador;
@@ -22,10 +23,14 @@ public class EvaluadorAlgoritmos extends Evaluador{
     
     private final EvaluadorCaminos evaluadorCaminos;
     private final int cantcasosPrueba;
-
-    public EvaluadorAlgoritmos(EvaluadorCaminos evaluadorCaminos, int cantcasosPrueba) {
+    private ArrayList<Object> entradas;
+    private ArrayList<ArrayList<Arista>> caminos;
+    
+    public EvaluadorAlgoritmos(EvaluadorCaminos evaluadorCaminos, int cantcasosPrueba,ArrayList<Object> entradas,ArrayList<ArrayList<Arista>> caminos) {
         this.evaluadorCaminos = evaluadorCaminos;
         this.cantcasosPrueba = cantcasosPrueba;
+        this.entradas=entradas;
+        this.caminos=caminos;
     }
     
    
@@ -34,7 +39,7 @@ public class EvaluadorAlgoritmos extends Evaluador{
     public void evaluar(ArrayList<Individuo> poblacion) {
          
         for (Individuo individuo : poblacion) {
-            double evaluacion= evaluadorCaminos.probCobertura(individuo.getGenotipo());
+            double evaluacion= evaluadorCaminos.probCobertura(individuo.getGenotipo() , entradas,caminos);
             individuo.setEvaluacion(evaluacion);
         }
     }

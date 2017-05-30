@@ -9,7 +9,10 @@
  */
 package GRAFO;
 
+import Lista.Cola;
+import Lista.ListaCD;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Implementacion de la Clase para el manejo de Grafos Dirigidos (Digrafos);
@@ -34,6 +37,8 @@ public class Digrafo<T> {
      * Representa el listado de Aristas del Digrafo
      */
     private ListaCD<Arista> aristas;
+    
+     HashMap<String,Arista> hashArist;
 
     ////////////////////////////////////////////////////////////
     // Digrafo - Implementacion de Metodos //////////////////////
@@ -44,6 +49,8 @@ public class Digrafo<T> {
      * <b> post: </b> Se creo un nuevo Digrafo sin Vertices y Aristas.
      */
     public Digrafo() {
+        hashAristas();
+        hashArist=new HashMap<>();
         this.vertices = new ListaCD<Vertice>();
         this.aristas = new ListaCD<Arista>();
     }
@@ -92,7 +99,7 @@ public class Digrafo<T> {
     private ArrayList<ArrayList<Vertice>> caminos = new ArrayList();
     private ArrayList<ArrayList<Vertice>> listasBase = new ArrayList();
 
-    public void getCaminos(Vertice origen,Vertice destino) {
+    public void getCaminos(Vertice origen, Vertice destino) {
 
         global.add(origen);
 
@@ -103,12 +110,11 @@ public class Digrafo<T> {
                     getCaminos((Vertice) origen.getVecinos().get(i), destino);
                 }
                 listasBase.remove(listasBase.size() - 1);
-                if(!listasBase.isEmpty())
-                {
+                if (!listasBase.isEmpty()) {
                     global = (ArrayList<Vertice>) listasBase.get(listasBase.size() - 1).clone();
-                }                                
+                }
             } else {
-                getCaminos((Vertice) origen.getVecinos().get(0),destino);
+                getCaminos((Vertice) origen.getVecinos().get(0), destino);
             }
 
         } else {
@@ -125,10 +131,6 @@ public class Digrafo<T> {
     public void setCaminos(ArrayList<ArrayList<Vertice>> caminos) {
         this.caminos = caminos;
     }
-    
-    
-    
-    
 
     /**
      * Metodo que permite insertar un nuevo Vertice dentro en el listado del
@@ -168,6 +170,17 @@ public class Digrafo<T> {
         }
         o.insertarVecino(d);
         this.aristas.insertarAlFinal(new Arista<T>(o, d, -1));
+        return (true);
+    }
+
+    public boolean insertarAristaCondicion(T orig, T dest,CondicionArista condicion) {
+        Vertice<T> o = this.buscarVertice(orig);
+        Vertice<T> d = this.buscarVertice(dest);
+        if (o == null || d == null) {
+            return (false);
+        }
+        o.insertarVecino(d);
+        this.aristas.insertarAlFinal(new Arista<T>(o, d, -1,condicion));
         return (true);
     }
 
@@ -1902,6 +1915,14 @@ public class Digrafo<T> {
             }
         }
     }
+    public void hashAristas(){       
+        for (int i = 0; i < aristas.getTamanio(); i++) {            
+            hashArist.put(aristas.get(i).getVertA()+","+aristas.get(i).getVertA(), aristas.get(i));            
+        }
+    }
+    public Arista buscarArista(Vertice<T> vertA,Vertice<T> vertB){
+        return hashArist.get(vertA+","+vertB);
+    }
 
     /**
      * Metodo que permite conocer el peso del Grafo. <br>
@@ -1925,5 +1946,7 @@ public class Digrafo<T> {
         }
         return (cad);
     }
+    
+    
 
 }// Fin de la Clase Digrafo - Grafo Dirigido

@@ -8,7 +8,9 @@
  * ----------------------------------------------------------------------
  */
 
-package GRAFO;
+package Lista;
+
+import Lista.NodoD;
 
 /**
  * Implementacion de clase para el manejo de una Cola encadenada. <br>

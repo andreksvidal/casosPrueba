@@ -8,7 +8,12 @@
  * ----------------------------------------------------------------------
  */
 
-package GRAFO;
+package Lista;
+
+import GRAFO.Arista;
+import GRAFO.Vertice;
+import Lista.Cola;
+import Lista.ListaCD;
 
 /**
  * Implementacion de la Clase para el manejo de Grafos No Dirigidos; <br>

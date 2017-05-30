@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------------
  */
 
-package GRAFO;
+package Lista;
 import java.util.Iterator;
 /**
  * Implementacion de Clase para el manejo de Iteradores en una Lista Circular Doble Enlazada<T> 

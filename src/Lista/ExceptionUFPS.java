@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------------
  */
 
-package GRAFO;
+package Lista;
 
 /**
  * Implementacion de clase para manejo de las excepciones generadas en algunas Estructuras de Datos. <br>

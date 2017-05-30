@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------------
  */
 
-package GRAFO;
+package Lista;
 import java.util.Iterator;
  
  /**

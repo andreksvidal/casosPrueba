@@ -5,9 +5,15 @@
  */
 package umaslamdaee;
 
+import GRAFO.Arista;
+import GRAFO.AsignadorValor;
+import GRAFO.CondicionArista;
+import GRAFO.Digrafo;
+import GRAFO.Vertice;
 import Problema.CasosPrueba.Algorimo1.EvaluadorCaminosAlgoritmo1;
 import Problema.CasosPrueba.EvaluadorAlgoritmos;
 import Problema.CasosPrueba.EvaluadorCaminos;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,12 +31,19 @@ public class PruebasAlgoritmo {
         int lambda = 25;//Valor de lambda.
         int maximoIteraciones = 100;//Maximo numero de itereciones para la convergencia del algoritmo.
 
-        /*EVALUADORES*/   
-        EvaluadorCaminos evCaminos= new EvaluadorCaminosAlgoritmo1();
-        Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos,4);//Para la funcion del sombrero Mexicano.
+        /*EVALUADORES*/
+        EvaluadorCaminos evCaminos = new EvaluadorCaminosAlgoritmo1();
+        ArrayList<ArrayList<Arista>> caminosAristas = crearGrafo();
+        ArrayList<Object> entradas = new ArrayList();
+        
+        entradas.add("p");
+        entradas.add("q");
+        entradas.add(new AsignadorValor("p+q"));
+        
+        Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos, 4, entradas,caminosAristas);//Para la funcion del sombrero Mexicano.
         /*FIN EVALUADORES*/
 
-        int dimensionGenes = 4*2;//Dimension del vector del individuo.
+        int dimensionGenes = 4 * 2;//Dimension del vector del individuo.
         float rangoMinimo = -1000;// Rango maximo del numero a generar aleatoriamente para crear un individuo.
         float rangoMaximo = 1000;//  Rango minimo del numero a generar aleatoriamente para crear un individuo.
 
@@ -62,10 +75,60 @@ public class PruebasAlgoritmo {
         }
         System.out.printf("\nCon una evaluacion de: [%f]", resultado.getEvaluacion());
         System.out.println("");
-       
+
         ////////////////////////////////////////////////////////////
         /*FIN BLOQUE NO MODIFICABLE*/
         ///////////////////////////////////////////////////////////
     }
+
+    private static ArrayList<ArrayList<Arista>> crearGrafo() {
+        Digrafo<Integer> digrafo = new Digrafo<>();
+
+        digrafo.insertarVertice(0);
+        digrafo.insertarVertice(1);
+        digrafo.insertarVertice(2);
+        digrafo.insertarVertice(3);
+        digrafo.insertarVertice(4);
+        digrafo.insertarVertice(5);
+        digrafo.insertarVertice(6);
+        digrafo.insertarVertice(7);
+        digrafo.insertarVertice(8);
+        digrafo.insertarVertice(9);
+        digrafo.insertarVertice(10);
+
+        digrafo.insertarArista(1, 2);
+        digrafo.insertarAristaCondicion(2, 3, new CondicionArista("p+q", "<", 10));
+        digrafo.insertarAristaCondicion(2, 4, new CondicionArista("p+q", ">", 10));
+        digrafo.insertarArista(3, 6);
+        digrafo.insertarArista(4, 5);
+        digrafo.insertarArista(5, 6);
+        digrafo.insertarAristaCondicion(6, 7, new CondicionArista("p", "<", 50));
+        digrafo.insertarAristaCondicion(6, 8, new CondicionArista("p", ">", 50));
+        digrafo.insertarArista(8, 9);
+        digrafo.insertarArista(9, 10);
+        digrafo.insertarArista(7, 10);
+
+        // System.out.println(digrafo.getAristas().getTamanio());
+        System.out.println("Lista de Adyacencia:");
+
+        digrafo.getCaminos(digrafo.buscarVertice(1), digrafo.buscarVertice(10));
+
+        ArrayList<ArrayList<Vertice>> caminos = digrafo.getCaminos();
+        ArrayList<ArrayList<Arista>> caminosAristas = new ArrayList<>();
+        for (int i = 0; i < caminos.size(); i++) {
+            ArrayList<Vertice> caminoTmp=caminos.get(i);
+            ArrayList<Arista> caminoArTmp=new ArrayList<>();
+            for (int j = 0; j < caminoTmp.size()-1; j++) {
+                caminoArTmp.add(digrafo.buscarArista(caminoTmp.get(i), caminoTmp.get(i+1)));
+            }
+            caminosAristas.add(caminoArTmp);
+        }
+        return caminosAristas;
+
+    }
     
+    public void obtenerCaminos(){
+        
+    }
+
 }

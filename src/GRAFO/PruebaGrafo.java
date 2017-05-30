@@ -33,19 +33,19 @@ public class PruebaGrafo {
        
        
         digrafo.insertarArista(1,2);
-        digrafo.insertarArista(2,3);
-        digrafo.insertarArista(2,4);
-        digrafo.insertarArista(4,5);
+        digrafo.insertarAristaCondicion(2,3,new CondicionArista("p+q", "<", 10));
+        digrafo.insertarAristaCondicion(2,4,new CondicionArista("p+q",">", 10));
         digrafo.insertarArista(3,6);
+        digrafo.insertarArista(4,5);
         digrafo.insertarArista(5,6);
-        digrafo.insertarArista(6,7);
-        digrafo.insertarArista(6,8);
+        digrafo.insertarAristaCondicion(6,7, new CondicionArista("p","<", 50));
+        digrafo.insertarAristaCondicion(6,8 ,new CondicionArista("p",">", 50));
         digrafo.insertarArista(8,9);
         digrafo.insertarArista(9,10);
         digrafo.insertarArista(7,10);
         
         
-        
+       
        // System.out.println(digrafo.getAristas().getTamanio());
         
         System.out.println("Lista de Adyacencia:");

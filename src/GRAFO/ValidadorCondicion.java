@@ -10,12 +10,24 @@ package GRAFO;
  * @author Andres Vidal - FIET - Ingeniería de Sistemas . 2017
  */
 public class ValidadorCondicion {
-    
-    
-    public boolean validadorIf()
-    {
-        return  true;
+
+    public boolean validadorIf(double valor,String operador, double valorComparar) {
+        switch (operador) {
+            case "==":
+                return valor == valorComparar;
+            case ">":
+                return valor > valorComparar;
+            case "<":
+                return valor < valorComparar;
+            case ">=":
+                return valor >= valorComparar;
+            case "<=":
+                return valor <= valorComparar;
+            case "!=":
+                return valor != valorComparar;
+            default:
+                return false;                   
+        }        
     }
-    
-    
+
 }

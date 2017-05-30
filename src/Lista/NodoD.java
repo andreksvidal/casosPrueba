@@ -8,7 +8,7 @@
  * ----------------------------------------------------------------------
  */
 
-package GRAFO;
+package Lista;
 
 /**
  * Implementacion de clase que contiene la informacion de los nodos de una lista Doble
