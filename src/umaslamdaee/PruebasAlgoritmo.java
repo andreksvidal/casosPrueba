@@ -38,7 +38,7 @@ public class PruebasAlgoritmo {
         
         entradas.add("p");
         entradas.add("q");
-        entradas.add(new AsignadorValor("p+q"));
+        entradas.add(new AsignadorValor());
         
         Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos, 4, entradas,caminosAristas);//Para la funcion del sombrero Mexicano.
         /*FIN EVALUADORES*/
@@ -110,9 +110,6 @@ public class PruebasAlgoritmo {
 
         
         digrafo.hashAristas();
-        // System.out.println(digrafo.getAristas().getTamanio());
-        System.out.println("Lista de Adyacencia:");
-
         digrafo.getCaminos(digrafo.buscarVertice(1), digrafo.buscarVertice(10));
 
         ArrayList<ArrayList<Vertice>> caminos = digrafo.getCaminos();

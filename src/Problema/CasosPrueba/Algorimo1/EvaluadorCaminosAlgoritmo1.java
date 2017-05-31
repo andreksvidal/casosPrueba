@@ -24,28 +24,29 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
     public double probCobertura(double[] genotipo, ArrayList<Object> entradas, ArrayList<ArrayList<Arista>> caminos) {
 
         HashMap<String, Integer> variablesSimples = new HashMap();
-        HashMap<String, AsignadorValor> condiciones = new HashMap();
+        AsignadorValor asignador = new AsignadorValor();
         for (int i = 0; i < entradas.size(); i++) {
             String clase = entradas.get(i).getClass().getName();
 
             if (clase.equalsIgnoreCase("java.lang.String")) {
                 variablesSimples.put((String)entradas.get(i), i);
-            } else {
-                AsignadorValor asignadorValor = (AsignadorValor) entradas.get(i);
-                String valor = asignadorValor.getCondicion();
-                condiciones.put(valor, asignadorValor);
+            } 
+            else
+            {
+                asignador=(AsignadorValor)entradas.get(i);
             }
 
         }
 
         double caminosCubiertos = 0;
         ArrayList<ArrayList<Double>> subVectores = traerSubVectores(genotipo, variablesSimples.size());
-
+        ArrayList<ArrayList<Double>> valoresActuales= (ArrayList<ArrayList<Double>>) subVectores.clone();
+        
         ValidadorCondicion validador = new ValidadorCondicion();
+       
         for (int caminoi = 0; caminoi < caminos.size(); caminoi++) {
             ArrayList<Arista> caminoActual = caminos.get(caminoi);
-            ArrayList<Double> subVectorActual = subVectores.get(caminoi);
-
+            ArrayList<Double> subVectorActual = valoresActuales.get(caminoi);
             boolean bandera = true;
 
             for (Arista arista : caminoActual) {
@@ -60,14 +61,15 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
 
                     } else {
 
-                        if (validador.validadorIf(condiciones.get(arista.getCondicion().getValor()).resolverValor(subVectorActual, variablesSimples), arista.getCondicion().getCondicion(), arista.getCondicion().getValorComparar())) {
+                        if (validador.validadorIf(asignador.resolverValor(clave, subVectorActual, variablesSimples), arista.getCondicion().getCondicion(), arista.getCondicion().getValorComparar())) {
                             bandera = false;
                             break;
                         }
                     }
                 }
-
             }
+            
+            valoresActuales.set(caminoi, subVectorActual);
 
             if (bandera) {
                 caminosCubiertos++;
