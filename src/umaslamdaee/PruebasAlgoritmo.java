@@ -14,6 +14,7 @@ import Problema.CasosPrueba.Algorimo1.EvaluadorCaminosAlgoritmo1;
 import Problema.CasosPrueba.EvaluadorAlgoritmos;
 import Problema.CasosPrueba.EvaluadorCaminos;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -29,7 +30,7 @@ public class PruebasAlgoritmo {
         /*BLOQUE DE PARAMETROS MODIFICABLES*/
         ///////////////////////////////////////////////////////////
         int lambda = 25;//Valor de lambda.
-        int maximoIteraciones = 500;//Maximo numero de itereciones para la convergencia del algoritmo.
+        int maximoIteraciones = 1000;//Maximo numero de itereciones para la convergencia del algoritmo.
 
         /*EVALUADORES*/
         EvaluadorCaminos evCaminos = new EvaluadorCaminosAlgoritmo1();
@@ -39,13 +40,15 @@ public class PruebasAlgoritmo {
         entradas.add("p");
         entradas.add("q");
         entradas.add(new AsignadorValor());
+       
+        HashMap<String , Double> variablesFlujo= new HashMap();
         
-        Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos, 4, entradas,caminosAristas);//Para la funcion del sombrero Mexicano.
+        Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos, 4, entradas,caminosAristas,variablesFlujo);
         /*FIN EVALUADORES*/
 
         int dimensionGenes = caminosAristas.size() * 2;//Dimension del vector del individuo. #Caminos * 2 variables en este caso .
-        float rangoMinimo = -200;// Rango maximo del numero a generar aleatoriamente para crear un individuo.
-        float rangoMaximo = 200;//  Rango minimo del numero a generar aleatoriamente para crear un individuo.
+        float rangoMinimo = -100;// Rango maximo del numero a generar aleatoriamente para crear un individuo.
+        float rangoMaximo = 100;//  Rango minimo del numero a generar aleatoriamente para crear un individuo.
 
         String objetivo = "+"; //Acepta 2 parametros : > "+" : Cuando el objetivo es maximizar , ordena de mayor a menor.
         //                      > "-" : Cuando el objetivo es minimizar , ordena de menor a mayor.

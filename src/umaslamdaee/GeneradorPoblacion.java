@@ -32,7 +32,7 @@ public class GeneradorPoblacion {
 
         
 
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 500; i++) {
             double genes[] = new double[dimensionGenes] ;
             double sigmas[] = new double[dimensionGenes];
 

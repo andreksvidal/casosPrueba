@@ -37,9 +37,13 @@ public class Digrafo<T> {
      * Representa el listado de Aristas del Digrafo
      */
     private ListaCD<Arista> aristas;
-
+    
     HashMap<String, Arista> hashArist;
 
+    
+    
+    
+    
     ////////////////////////////////////////////////////////////
     // Digrafo - Implementacion de Metodos //////////////////////
     ////////////////////////////////////////////////////////////
@@ -152,6 +156,35 @@ public class Digrafo<T> {
         return (true);
     }
 
+    /**
+     * Metodo que permite insertar un nuevo Vertice que asinacion dentro en el listado del
+     * Grafo. <br>
+     * <b> post: </b> Se inserto un Vertice dentro del Grafo. <br>
+     *
+     * @param info Representa la informacion del Vertice que se desea ingresar
+     * al Grafo. <br>
+     * @return Un objeto de tipo boolean que representa el resultado de la
+     * operacion.
+     */
+    public boolean insertarVerticeConAsignacion(T info, AsignacionVertice asignacion) {
+        Vertice v = new Vertice(info);
+        v.setAsignacion(asignacion);
+        if (esta(v)) {
+            return (false);
+        }
+        this.vertices.insertarAlFinal(v);
+        return (true);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * Metodo que permite insertar una nueva Arista en el Listado del Grafo.
      * <br>

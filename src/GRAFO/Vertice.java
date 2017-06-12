@@ -42,6 +42,18 @@ public class Vertice<T>
      * Representa el Vertice predecesor en un recorrido
      */
     private Vertice predecesor;
+   
+    
+   private AsignacionVertice asignacion;
+
+    public AsignacionVertice getAsignacion() {
+        return asignacion;
+    }
+
+    public void setAsignacion(AsignacionVertice asignacion) {
+        this.asignacion = asignacion;
+    }
+   
     
     /**
      * Representa un valor que indica si el Vertice ha sido visitado;
@@ -65,7 +77,10 @@ public class Vertice<T>
         this.vecinos = new ListaCD<Vertice>();
         this.esVisit = false;
         this.predecesor = null;
+        this.asignacion=null;
     }
+    
+    
 
     /**
      * Obtiene la información del Vertice. <br>

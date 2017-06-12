@@ -8,6 +8,7 @@ package Problema.CasosPrueba;
 
 import GRAFO.Arista;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 
@@ -16,10 +17,6 @@ import java.util.ArrayList;
  * @author Andrés Vidal.Universidad del Cauca - Ingeniería de Sistemas. 2017
  */
 public abstract class EvaluadorCaminos {
-
-   
     
-    
-    
-    public abstract double probCobertura(double[] genotipo, ArrayList<Object> entradas, ArrayList<ArrayList<Arista>> caminos);   
+    public abstract double probCobertura(double[] genotipo, ArrayList<Object> entradas, ArrayList<ArrayList<Arista>> caminos, HashMap<String, Double> variablesFlujo);   
 }
