@@ -47,6 +47,7 @@ public class Arista<T> {
      * Representa la condicion de la arista
      */
     private CondicionArista condicion;
+    private boolean visitado;
 
     ////////////////////////////////////////////////////////////
     // Arista - Implementacion de Metodos //////////////////////
@@ -78,8 +79,18 @@ public class Arista<T> {
         this.vertB = vB;
         this.peso = p;
         this.esVisit = false;
-        condicion=null;
+        condicion = null;
     }
+
+    public boolean isVisitado() {
+        return visitado;
+    }
+
+    public void setVisitado(boolean visitado) {
+        this.visitado = visitado;
+    }
+    
+    
 
     /**
      * Obtiene el Vertice de uno de los extremos de la Arista. <br>
