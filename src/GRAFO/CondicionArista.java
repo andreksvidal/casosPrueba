@@ -13,13 +13,60 @@ public class CondicionArista {
     private String valor;
     private String condicion;
     private double valorComparar;
-
+    private boolean esFinCiclo;
+    private Arista origen;
+    private Arista aristaSalida;
+    
+    
     public CondicionArista(String valor, String condicion, double valorComparar) {
         this.valor = valor;
         this.condicion = condicion;
         this.valorComparar = valorComparar;
+        this.esFinCiclo=false;
+        this.origen=null;
+        this.aristaSalida=null;
     }
 
+    public CondicionArista(String valor, String condicion, double valorComparar, Arista origen, Arista aristaSalida) {
+        this.valor = valor;
+        this.condicion = condicion;
+        this.valorComparar = valorComparar;
+        this.origen = origen;
+        this.aristaSalida=aristaSalida;
+        this.esFinCiclo=true;
+    }
+
+    public boolean esFinCiclo() {
+        return esFinCiclo;
+    }
+
+    public void setEsFinCiclo(boolean esFinCiclo) {
+        this.esFinCiclo = esFinCiclo;
+    }
+
+    public Arista getOrigen() {
+        return origen;
+    }
+
+    public Arista getAristaSalida() {
+        return aristaSalida;
+    }
+
+    public void setAristaSalida(Arista aristaSalida) {
+        this.aristaSalida = aristaSalida;
+    }
+
+    
+    
+    public void setOrigen(Arista origen) {
+        this.origen = origen;
+    }
+    
+    
+
+    
+    
+    
     public String getValor() {
         return valor;
     }
