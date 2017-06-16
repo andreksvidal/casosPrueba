@@ -60,7 +60,7 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
 //            }
             ArrayList<Arista> aristasCamino = verificarCubreAristas(caminoActual, subVectorActual, varialesFlujoActuales, variablesSimples, validador, asignador);
             ArrayList<Arista> aux= aristasNoRepetidas(aristasCamino,aristasCubiertas);
-            
+
             aristasCubiertas.addAll(aux);
             
             
@@ -68,7 +68,10 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
         
         
         
-        double probabilidad = (double) caminosCubiertos / caminos.size();
+//        double probabilidad = (double) caminosCubiertos / caminos.size();
+
+        double totalAristas=getTotalAristas(caminos);
+        double probabilidad = (double) aristasCubiertas.size() / totalAristas;
         //System.out.println("Probabilidad"+ probabilidad);
         return probabilidad;
     }
@@ -76,7 +79,17 @@ public class EvaluadorCaminosAlgoritmo1 extends EvaluadorCaminos {
     
     private double getTotalAristas(ArrayList<ArrayList<Arista>> caminos)
     {
-        return -1;
+        ArrayList<Arista> caminosTotales=new ArrayList<>();
+        caminosTotales.addAll(caminos.get(0));
+        for (int i = 1; i < caminos.size(); i++) {
+            ArrayList<Arista> camino=caminos.get(i);
+            for (Arista arista : camino) {
+                if(!caminosTotales.contains(arista)){
+                    caminosTotales.add(arista);
+                }
+            }
+        }
+        return caminosTotales.size();
     }
     private ArrayList<Arista> aristasNoRepetidas(ArrayList<Arista> aristasCamino, ArrayList<Arista> aristasCubiertas) {
         

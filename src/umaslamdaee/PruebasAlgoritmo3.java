@@ -113,9 +113,9 @@ public class PruebasAlgoritmo3 {
         digrafo.insertarArista(2, 3);
         digrafo.insertarArista(3, 4);
         digrafo.insertarAristaCondicion(4,5, new CondicionArista("pos MOD 2", "==", 0));
-        digrafo.insertarAristaCondicion(4, 6 ,  new CondicionArista("pos MOD 2","!=", 0));
+        digrafo.insertarAristaCondicion(4, 6 ,  new CondicionArista("pos MOD 2","!=", 0));//
         digrafo.insertarArista(5, 7);
-        digrafo.insertarArista(6, 7);
+        digrafo.insertarArista(6, 7);//
         digrafo.insertarArista(7, 8);
         digrafo.insertarArista(8, 9);
         digrafo.insertarArista(9, 10);
