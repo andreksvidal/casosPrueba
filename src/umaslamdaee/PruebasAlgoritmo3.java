@@ -36,21 +36,21 @@ public class PruebasAlgoritmo3 {
         EvaluadorCaminos evCaminos = new EvaluadorCaminosAlgoritmo1();
         ArrayList<ArrayList<Arista>> caminosAristas = crearGrafo();
         ArrayList<Object> entradas = new ArrayList();
-        
+
         entradas.add("number");
         entradas.add(new AsignadorValor());
-       
-        HashMap<String , Double> variablesFlujo= new HashMap();
-        
+
+        HashMap<String, Double> variablesFlujo = new HashMap();
+
         variablesFlujo.put("sum", 0.0);
         variablesFlujo.put("pos", 1.0);
         variablesFlujo.put("digit", 0.0);
-        variablesFlujo.put("result",0.0);
+        variablesFlujo.put("result", 0.0);
         variablesFlujo.put("value", 0.0);
-        Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos,caminosAristas.size() , entradas,caminosAristas,variablesFlujo);
+        Evaluador evaluador = new EvaluadorAlgoritmos(evCaminos, caminosAristas.size(), entradas, caminosAristas, variablesFlujo);
         /*FIN EVALUADORES*/
 
-        int dimensionGenes = caminosAristas.size() * (entradas.size()-1);//Dimension del vector del individuo. #Caminos * 2 variables en este caso .
+        int dimensionGenes = caminosAristas.size() * (entradas.size() - 1);//Dimension del vector del individuo. #Caminos * 2 variables en este caso .
         float rangoMinimo = -100;// Rango maximo del numero a generar aleatoriamente para crear un individuo.
         float rangoMaximo = 100;//  Rango minimo del numero a generar aleatoriamente para crear un individuo.
 
@@ -93,107 +93,110 @@ public class PruebasAlgoritmo3 {
 
         digrafo.insertarVertice(1);
         digrafo.insertarVertice(2);
-        digrafo.insertarVerticeConAsignacion(3 , new AsignacionVertice("digit" , "number MOD 10"));
+        digrafo.insertarVerticeConAsignacion(3, new AsignacionVertice("digit", "number MOD 10"));
         digrafo.insertarVertice(4);
         digrafo.insertarVerticeConAsignacion(5, new AsignacionVertice("value", "3*digit"));
-        digrafo.insertarVerticeConAsignacion(6 , new AsignacionVertice("value", "digit"));
-        digrafo.insertarVerticeConAsignacion(7 , new AsignacionVertice("sum", "sum+value"));
+        digrafo.insertarVerticeConAsignacion(6, new AsignacionVertice("value", "digit"));
+        digrafo.insertarVerticeConAsignacion(7, new AsignacionVertice("sum", "sum+value"));
         digrafo.insertarVerticeConAsignacion(8, new AsignacionVertice("number", "number/10"));
-        digrafo.insertarVerticeConAsignacion(9 , new AsignacionVertice("pos", "pos+1"));
+        digrafo.insertarVerticeConAsignacion(9, new AsignacionVertice("pos", "pos+1"));
         digrafo.insertarVertice(10);
-        digrafo.insertarVerticeConAsignacion(11 , new AsignacionVertice("result","sum MOD 11"));
+        digrafo.insertarVerticeConAsignacion(11, new AsignacionVertice("result", "sum MOD 11"));
         digrafo.insertarVertice(12);
         digrafo.insertarVerticeConAsignacion(13, new AsignacionVertice("result", "1"));
         digrafo.insertarVertice(14);
-        
-        
-        
-       
+
         digrafo.insertarArista(1, 2);
         digrafo.insertarArista(2, 3);
         digrafo.insertarArista(3, 4);
-        digrafo.insertarAristaCondicion(4,5, new CondicionArista("pos MOD 2", "==", 0));
-        digrafo.insertarAristaCondicion(4, 6 ,  new CondicionArista("pos MOD 2","!=", 0));//
+        digrafo.insertarAristaCondicion(4, 5, new CondicionArista("pos MOD 2", "==", 0));
+        digrafo.insertarAristaCondicion(4, 6, new CondicionArista("pos MOD 2", "!=", 0));//
         digrafo.insertarArista(5, 7);
         digrafo.insertarArista(6, 7);//
         digrafo.insertarArista(7, 8);
         digrafo.insertarArista(8, 9);
         digrafo.insertarArista(9, 10);
-        
+
         digrafo.insertarAristaCondicion(10, 11, new CondicionArista("number", ">", 0));
-        digrafo.insertarAristaCondicion(10, 3, new CondicionArista("number", "<=",0,digrafo.buscarArista(3, 4),digrafo.buscarArista(10, 11)));
-        
+        digrafo.insertarAristaCondicion(10, 3, new CondicionArista("number", "<=", 0, digrafo.buscarArista(3, 4), digrafo.buscarArista(10, 11)));
+
         digrafo.insertarArista(11, 12);
-        digrafo.insertarAristaCondicion(12, 13 , new CondicionArista("result","==", 10));
-        digrafo.insertarAristaCondicion(12, 14 , new CondicionArista("result", "!=", 10));
-        digrafo.insertarArista(14,13);
-        
-        
+        digrafo.insertarAristaCondicion(12, 14, new CondicionArista("result", "==", 10));
+        digrafo.insertarAristaCondicion(12, 13, new CondicionArista("result", "!=", 10));
+        digrafo.insertarArista(13, 14);
+
         digrafo.hashAristas();
+        digrafo.grafoRecursivo();
         digrafo.getCaminos(digrafo.buscarVertice(1), digrafo.buscarVertice(10));
 
-        ArrayList<Arista> camino1= new ArrayList();
-        ArrayList<Arista> camino2= new ArrayList();
-        ArrayList<Arista> camino3= new ArrayList();
-        ArrayList<Arista> camino4= new ArrayList();
-        
-        
-//        camino1.add(digrafo.buscarArista(1,2));
-//        camino1.add(digrafo.buscarArista(2,3));
-//        camino1.add(digrafo.buscarArista(3,4));
-//        camino1.add(digrafo.buscarArista(4,6));
-//        camino1.add(digrafo.buscarArista(6,7));
-//        camino1.add(digrafo.buscarArista(7,8));
-//        camino1.add(digrafo.buscarArista(8,9));
-//        camino1.add(digrafo.buscarArista(9,10));
-//        camino1.add(digrafo.buscarArista(10,11));
-//        camino1.add(digrafo.buscarArista(11,12));
-//        
-//        camino1.add(digrafo.buscarArista(12,14));
-//        
-        
-        
-        camino2.add(digrafo.buscarArista(1,2));
-        camino2.add(digrafo.buscarArista(2,3));
-        camino2.add(digrafo.buscarArista(3,4));
-        camino2.add(digrafo.buscarArista(4,5));
-        camino2.add(digrafo.buscarArista(5,7));
-        camino2.add(digrafo.buscarArista(7,8));
-        camino2.add(digrafo.buscarArista(8,9));
-        camino2.add(digrafo.buscarArista(9,10));
-        camino2.add(digrafo.buscarArista(10,3));
-        camino2.add(digrafo.buscarArista(10,11));
-        camino2.add(digrafo.buscarArista(11,12));
-        camino2.add(digrafo.buscarArista(12,13));
-       
-        
-        camino3.add(digrafo.buscarArista(1,2));
-        camino3.add(digrafo.buscarArista(2,3));
-        camino3.add(digrafo.buscarArista(3,4));
-        camino3.add(digrafo.buscarArista(4,5));
-        camino3.add(digrafo.buscarArista(5,7));
-        camino3.add(digrafo.buscarArista(7,8));
-        camino3.add(digrafo.buscarArista(8,9));
-        camino3.add(digrafo.buscarArista(9,10));
-        camino3.add(digrafo.buscarArista(10,3));
-        camino3.add(digrafo.buscarArista(10,11));
-        camino3.add(digrafo.buscarArista(11,12));
-        camino3.add(digrafo.buscarArista(12,14));
-        camino3.add(digrafo.buscarArista(14,13));
-       
-        
-        
+        ArrayList<Arista> camino1 = new ArrayList();
+        ArrayList<Arista> camino2 = new ArrayList();
+        ArrayList<Arista> camino3 = new ArrayList();
+        ArrayList<Arista> camino4 = new ArrayList();
+
+        camino1.add(digrafo.buscarArista(1, 2));
+        camino1.add(digrafo.buscarArista(2, 3));
+        camino1.add(digrafo.buscarArista(3, 4));
+        camino1.add(digrafo.buscarArista(4, 6));
+        camino1.add(digrafo.buscarArista(6, 7));
+        camino1.add(digrafo.buscarArista(7, 8));
+        camino1.add(digrafo.buscarArista(8, 9));
+        camino1.add(digrafo.buscarArista(9, 10));
+        camino1.add(digrafo.buscarArista(10, 3));
+        camino1.add(digrafo.buscarArista(10, 11));
+        camino1.add(digrafo.buscarArista(11, 12));
+        camino1.add(digrafo.buscarArista(12, 13));
+        camino1.add(digrafo.buscarArista(13, 14));
+
+        camino2.add(digrafo.buscarArista(1, 2));
+        camino2.add(digrafo.buscarArista(2, 3));
+        camino2.add(digrafo.buscarArista(3, 4));
+        camino2.add(digrafo.buscarArista(4, 5));
+        camino2.add(digrafo.buscarArista(5, 7));
+        camino2.add(digrafo.buscarArista(7, 8));
+        camino2.add(digrafo.buscarArista(8, 9));
+        camino2.add(digrafo.buscarArista(9, 10));
+        camino2.add(digrafo.buscarArista(10, 3));
+        camino2.add(digrafo.buscarArista(10, 11));
+        camino2.add(digrafo.buscarArista(11, 12));
+        camino2.add(digrafo.buscarArista(12, 14));
+
+        camino3.add(digrafo.buscarArista(1, 2));
+        camino3.add(digrafo.buscarArista(2, 3));
+        camino3.add(digrafo.buscarArista(3, 4));
+        camino3.add(digrafo.buscarArista(4, 5));
+        camino3.add(digrafo.buscarArista(5, 7));
+        camino3.add(digrafo.buscarArista(7, 8));
+        camino3.add(digrafo.buscarArista(8, 9));
+        camino3.add(digrafo.buscarArista(9, 10));
+        camino3.add(digrafo.buscarArista(10, 11));
+        camino3.add(digrafo.buscarArista(11, 12));
+        camino3.add(digrafo.buscarArista(12, 13));
+        camino3.add(digrafo.buscarArista(13, 14));
+
+        camino4.add(digrafo.buscarArista(1, 2));
+        camino4.add(digrafo.buscarArista(2, 3));
+        camino4.add(digrafo.buscarArista(3, 4));
+        camino4.add(digrafo.buscarArista(4, 6));
+        camino4.add(digrafo.buscarArista(6, 7));
+        camino4.add(digrafo.buscarArista(7, 8));
+        camino4.add(digrafo.buscarArista(8, 9));
+        camino4.add(digrafo.buscarArista(9, 10));
+        camino4.add(digrafo.buscarArista(10, 11));
+        camino4.add(digrafo.buscarArista(11, 12));
+        camino4.add(digrafo.buscarArista(12, 14));
+
         ArrayList<ArrayList<Arista>> caminosAristas = new ArrayList<>();
-//        caminosAristas.add(camino1);
+        caminosAristas.add(camino1);
         caminosAristas.add(camino2);
-          caminosAristas.add(camino3);
-//        caminosAristas.add(camino4);
-   
+        caminosAristas.add(camino3);
+        caminosAristas.add(camino4);
+
         return caminosAristas;
     }
-    
-    public void obtenerCaminos(){
-        
+
+    public void obtenerCaminos() {
+
     }
 
 }

@@ -20,7 +20,7 @@ import java.util.HashMap;
  *
  * @author Andrés Vidal.Universidad del Cauca - Ingeniería de Sistemas. 2017
  */
-public class PruebasAlgoritmo {
+public class PruebasAlgoritmo2 {
 
     /**
      * @param args the command line arguments
@@ -35,6 +35,8 @@ public class PruebasAlgoritmo {
         /*EVALUADORES*/
         EvaluadorCaminos evCaminos = new EvaluadorCaminosAlgoritmo1();
         ArrayList<ArrayList<Arista>> caminosAristas = crearGrafo();
+
+        
         ArrayList<Object> entradas = new ArrayList();
         
         entradas.add("p");
@@ -87,7 +89,7 @@ public class PruebasAlgoritmo {
     private static ArrayList<ArrayList<Arista>> crearGrafo() {
         Digrafo<Integer> digrafo = new Digrafo<>();
 
-        digrafo.insertarVertice(0);
+
         digrafo.insertarVertice(1);
         digrafo.insertarVertice(2);
         digrafo.insertarVertice(3);
@@ -98,22 +100,34 @@ public class PruebasAlgoritmo {
         digrafo.insertarVertice(8);
         digrafo.insertarVertice(9);
         digrafo.insertarVertice(10);
+        digrafo.insertarVertice(11);
+        digrafo.insertarVertice(12);
+        digrafo.insertarVertice(13);
+        digrafo.insertarVertice(14);
+        digrafo.insertarVertice(15);
 
         digrafo.insertarArista(1, 2);
-        digrafo.insertarAristaCondicion(2, 3, new CondicionArista("p+q", "<", 10));
-        digrafo.insertarAristaCondicion(2, 4, new CondicionArista("p+q", ">", 10));
-        digrafo.insertarArista(3, 6);
-        digrafo.insertarArista(4, 5);
-        digrafo.insertarArista(5, 6);
-        digrafo.insertarAristaCondicion(6, 7, new CondicionArista("p", "<", 50));
-        digrafo.insertarAristaCondicion(6, 8, new CondicionArista("p", ">", 50));
-        digrafo.insertarArista(8, 9);
-        digrafo.insertarArista(9, 10);
+        digrafo.insertarArista(2, 3);
+        digrafo.insertarArista(2, 4);
+        digrafo.insertarArista(3, 5);
+        digrafo.insertarArista(4, 6);
+        digrafo.insertarArista(5, 7);
+        digrafo.insertarArista(6, 8);
+        digrafo.insertarArista(7, 9);
         digrafo.insertarArista(7, 10);
+        digrafo.insertarArista(8, 11);
+        digrafo.insertarArista(11, 10);
+        digrafo.insertarArista(11, 12);
+        digrafo.insertarArista(9, 13);
+        digrafo.insertarArista(10, 13);
+        digrafo.insertarArista(13, 15);
+        digrafo.insertarArista(12, 14);
+        digrafo.insertarArista(14, 15);
+        
 
         
         digrafo.hashAristas();
-        digrafo.getCaminos(digrafo.buscarVertice(1), digrafo.buscarVertice(10));
+        digrafo.getCaminos(digrafo.buscarVertice(1), digrafo.buscarVertice(15));
 
         ArrayList<ArrayList<Vertice>> caminos = digrafo.getCaminos();
         ArrayList<ArrayList<Arista>> caminosAristas = new ArrayList<>();

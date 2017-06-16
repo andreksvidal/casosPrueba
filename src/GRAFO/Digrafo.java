@@ -37,13 +37,9 @@ public class Digrafo<T> {
      * Representa el listado de Aristas del Digrafo
      */
     private ListaCD<Arista> aristas;
-    
+
     HashMap<String, Arista> hashArist;
 
-    
-    
-    
-    
     ////////////////////////////////////////////////////////////
     // Digrafo - Implementacion de Metodos //////////////////////
     ////////////////////////////////////////////////////////////
@@ -57,7 +53,7 @@ public class Digrafo<T> {
         hashArist = new HashMap<>();
         this.vertices = new ListaCD<Vertice>();
         this.aristas = new ListaCD<Arista>();
-      
+
     }
 
     /**
@@ -137,6 +133,16 @@ public class Digrafo<T> {
         this.caminos = caminos;
     }
 
+    public void grafoRecursivo() {
+        for (int i = 0; i < aristas.getTamanio(); i++) {
+            Arista arista = aristas.get(i);
+            if ((Integer) arista.getVertA().getInfo() > (Integer) arista.getVertB().getInfo()) {
+                System.out.println("Vert A: " + arista.getVertA().getInfo() + " Vert B: " + arista.getVertB().getInfo());
+                aristas.eliminar(i);
+            }
+        }
+    }
+
     /**
      * Metodo que permite insertar un nuevo Vertice dentro en el listado del
      * Grafo. <br>
@@ -157,8 +163,8 @@ public class Digrafo<T> {
     }
 
     /**
-     * Metodo que permite insertar un nuevo Vertice que asinacion dentro en el listado del
-     * Grafo. <br>
+     * Metodo que permite insertar un nuevo Vertice que asinacion dentro en el
+     * listado del Grafo. <br>
      * <b> post: </b> Se inserto un Vertice dentro del Grafo. <br>
      *
      * @param info Representa la informacion del Vertice que se desea ingresar
@@ -175,16 +181,7 @@ public class Digrafo<T> {
         this.vertices.insertarAlFinal(v);
         return (true);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * Metodo que permite insertar una nueva Arista en el Listado del Grafo.
      * <br>
@@ -1955,15 +1952,15 @@ public class Digrafo<T> {
             hashArist = new HashMap();
         }
         for (int i = 0; i < aristas.getTamanio(); i++) {
-            Arista arista= aristas.get(i);
-            hashArist.put(arista.getVertA() + "," + arista.getVertB(),arista);
+            Arista arista = aristas.get(i);
+            hashArist.put(arista.getVertA() + "," + arista.getVertB(), arista);
         }
     }
 
     public Arista buscarArista(Vertice<T> vertA, Vertice<T> vertB) {
-        
-            return hashArist.get(vertA + "," + vertB);
-     
+
+        return hashArist.get(vertA + "," + vertB);
+
     }
 
     /**
